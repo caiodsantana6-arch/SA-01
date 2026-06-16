@@ -1,0 +1,120 @@
+=========================================
+      PASSO A PASSO DO PROJETO SA-01     
+=========================================
+
+--- FASE 1: INFRAESTRUTURA ---
+
+[ ] PASSO 1.1: Criar o Projeto
+* Acesse start.spring.io
+* Escolha: Maven, Java e Spring Boot 3.x
+* Adicione as dependências:
+  - Spring Web
+  - Spring Data JPA
+  - Lombok
+  - Spring Security
+  - H2 Database (ou seu banco local)
+* Crie os 7 pacotes obrigatórios:
+  config, controller, service, repository,
+  entity, dto, exception.
+
+[ ] PASSO 1.2: Configurar o Banco
+* No arquivo 'application.properties', insira:
+  spring.datasource.url=jdbc:h2:mem:chamadosdb
+  spring.datasource.username=sa
+  spring.datasource.password=
+  spring.jpa.hibernate.ddl-auto=update
+
+--- FASE 2: ENTIDADES (entity) ---
+
+[ ] PASSO 2.1: Criar os Enums
+* StatusChamado: ABERTO, EM_ANDAMENTO,
+  FINALIZADO, CANCELADO.
+* PrioridadeChamado: BAIXA, MEDIA, ALTA.
+
+[ ] PASSO 2.2: Classe Categoria
+* id, nome, descricao.
+
+[ ] PASSO 2.3: Classe Tecnico
+* id, nome, email, especialidade, ativo.
+* Mapeamento ManyToMany:
+  @ManyToMany(mappedBy = "tecnicos")
+
+[ ] PASSO 2.4: Classe Chamado
+* id, titulo, descricao, solicitante,
+  local, dataAbertura, dataFinalizacao.
+* Enums: Status e Prioridade.
+* Relacionamento @ManyToOne com Categoria.
+* Relacionamento @ManyToMany com Tecnico
+  (copie a @JoinTable do enunciado).
+
+--- FASE 3: BANCO (repository) ---
+
+[ ] PASSO 3.1: Criar Interfaces
+* Crie as 3 interfaces herdando de JpaRepository:
+  - CategoriaRepository
+  - TecnicoRepository
+  - ChamadoRepository
+
+--- FASE 4: ERROS (exception) ---
+
+[ ] PASSO 4.1: Exceções Customizadas
+* Crie RecursoNaoEncontradoException e
+  RegraNegocioException (ambas estendendo
+  RuntimeException).
+
+[ ] PASSO 4.2: Manipulador Global
+* Crie o GlobalExceptionHandler com
+  @RestControllerAdvice para capturar os
+  erros e devolver o JSON padrão:
+  { "status", "erro", "mensagem" }
+
+--- FASE 5: DADOS (dto) ---
+
+[ ] PASSO 5.1: Criar DTOs
+* Crie os objetos de transferência de
+  dados (ex: CategoriaDTO, TecnicoDTO).
+* Crie o VinculoTecnicoDTO para a rota
+  PATCH, contendo: List<Long> tecnicosIds.
+
+--- FASE 6: REGRAS (service) ---
+
+[ ] PASSO 6.1: Categoria e Técnico
+* Crie os métodos de Salvar, Listar e Deletar.
+* Valide no Delete se o registro não está 
+  vinculado a nenhum chamado.
+
+[ ] PASSO 6.2: ChamadoService
+* Salvar: Forçar status ABERTO e dataAbertura.
+* PATCH Status: 
+  - Se for EM_ANDAMENTO, exija técnico.
+  - Se for FINALIZADO, trave alterações e 
+    salve a dataFinalizacao.
+* PATCH Técnicos:
+  - Valide se o chamado está aberto/em andamento.
+  - Bloqueie se tentar por técnico inativo.
+
+--- FASE 7: ROTAS (controller) ---
+
+[ ] PASSO 7.1: Criar Controllers
+* Crie CategoriaController, TecnicoController
+  e ChamadoController.
+* Adicione as rotas PATCH específicas:
+  - /chamados/{id}/status
+  - /chamados/{id}/tecnicos
+
+--- FASE 8: SEGURANÇA (config) ---
+
+[ ] PASSO 8.1: Configurar Basic Auth
+* Crie a classe SecurityConfig.
+* Libere as rotas GET pública.
+* Bloqueie POST, PUT, PATCH, DELETE.
+* Defina o usuário de teste:
+  Usuário: admin | Senha: admin123
+
+--- FASE 9: ENTREGA ---
+
+[ ] PASSO 9.1: Testes Finais
+* Teste tudo no Postman ou Insomnia.
+[ ] PASSO 9.2: Documentar
+* Complete o README.md conforme o item 6.
+=========================================
