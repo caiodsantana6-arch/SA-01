@@ -31,24 +31,21 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers(HttpMethod.GET, "/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                                "/chamados/**",
+                                "/categorias/**",
+                                "/tecnicos/**")
+                        .permitAll()
 
-                        .requestMatchers(HttpMethod.POST, "/**").authenticated()
-
-                        .requestMatchers(HttpMethod.PUT, "/**").authenticated()
-
-                        .requestMatchers(HttpMethod.PATCH, "/**").authenticated()
-
-                        .requestMatchers(HttpMethod.DELETE, "/**").authenticated()
-
-                        .anyRequest().authenticated())
+                        .anyRequest()
+                        .authenticated())
 
                 .httpBasic(Customizer.withDefaults());
 
