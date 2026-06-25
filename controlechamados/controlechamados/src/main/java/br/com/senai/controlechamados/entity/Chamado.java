@@ -24,7 +24,7 @@ public class Chamado {
     @Enumerated(EnumType.STRING)
     private StatusChamado status = StatusChamado.ABERTO;
 
-    private LocalDateTime dataAbertura;
+    private LocalDateTime dataAbertura = LocalDateTime.now();
     private LocalDateTime dataFinalizacao;
 
     @ManyToOne
