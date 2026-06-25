@@ -12,12 +12,12 @@ public class TecnicoResponseDTO {
     public TecnicoResponseDTO() {
     }
 
-    public TecnicoResponseDTO(Ativo ativo, String email, String especialidade, Long id, String nome) {
-        this.ativo = ativo;
-        this.email = email;
-        this.especialidade = especialidade;
+    public TecnicoResponseDTO(Long id, String nome, String email, String especialidade, Ativo ativo) {
         this.id = id;
         this.nome = nome;
+        this.email = email;
+        this.especialidade = especialidade;
+        this.ativo = ativo;
     }
 
     public Ativo getAtivo() {
