@@ -16,7 +16,7 @@ public class Tecnico {
     private String especialidade;
 
     @Enumerated(EnumType.STRING)
-    private Ativo ativo;
+    private Ativo ativo = Ativo.ATIVO;
 
     @ManyToMany (mappedBy = "tecnicos")
     private List<Chamado> chamados;
