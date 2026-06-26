@@ -1,5 +1,6 @@
 package br.com.senai.controlechamados.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.senai.controlechamados.entity.Categoria;
@@ -15,17 +16,17 @@ public class ChamadoResponseDTO {
     private String local;
     private Prioridade prioridade;
     private StatusChamado status;
-    private String dataAbertura;
-    private String dataFinalizacao;
-    private Categoria categoria;
-    private List<Tecnico> tecnicos;
+    private LocalDate dataAbertura;
+    private LocalDate dataFinalizacao;
+    private CategoriaResponseDTO categoria;
+    private List<TecnicoResponseDTO> tecnicos;
 
     public ChamadoResponseDTO() {
     }
 
     public ChamadoResponseDTO(Long id, String titulo, String descricao, String solicitante,
-                              String local, Prioridade prioridade, StatusChamado status, String dataAbertura,
-                              String dataFinalizacao, Categoria categoria, List<Tecnico> tecnicos) {
+                              String local, Prioridade prioridade, StatusChamado status, LocalDate dataAbertura,
+                              LocalDate dataFinalizacao, CategoriaResponseDTO categoria, List<TecnicoResponseDTO> tecnicos) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -39,20 +40,28 @@ public class ChamadoResponseDTO {
         this.tecnicos = tecnicos;
     }
 
-    public Long getId() {
-        return id;
+    public CategoriaResponseDTO getCategoria() {
+        return categoria;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCategoria(CategoriaResponseDTO categoria) {
+        this.categoria = categoria;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public LocalDate getDataAbertura() {
+        return dataAbertura;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setDataAbertura(LocalDate dataAbertura) {
+        this.dataAbertura = dataAbertura;
+    }
+
+    public LocalDate getDataFinalizacao() {
+        return dataFinalizacao;
+    }
+
+    public void setDataFinalizacao(LocalDate dataFinalizacao) {
+        this.dataFinalizacao = dataFinalizacao;
     }
 
     public String getDescricao() {
@@ -63,12 +72,12 @@ public class ChamadoResponseDTO {
         this.descricao = descricao;
     }
 
-    public String getSolicitante() {
-        return solicitante;
+    public Long getId() {
+        return id;
     }
 
-    public void setSolicitante(String solicitante) {
-        this.solicitante = solicitante;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLocal() {
@@ -87,6 +96,14 @@ public class ChamadoResponseDTO {
         this.prioridade = prioridade;
     }
 
+    public String getSolicitante() {
+        return solicitante;
+    }
+
+    public void setSolicitante(String solicitante) {
+        this.solicitante = solicitante;
+    }
+
     public StatusChamado getStatus() {
         return status;
     }
@@ -95,35 +112,19 @@ public class ChamadoResponseDTO {
         this.status = status;
     }
 
-    public String getDataAbertura() {
-        return dataAbertura;
-    }
-
-    public void setDataAbertura(String dataAbertura) {
-        this.dataAbertura = dataAbertura;
-    }
-
-    public String getDataFinalizacao() {
-        return dataFinalizacao;
-    }
-
-    public void setDataFinalizacao(String dataFinalizacao) {
-        this.dataFinalizacao = dataFinalizacao;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public List<Tecnico> getTecnicos() {
+    public List<TecnicoResponseDTO> getTecnicos() {
         return tecnicos;
     }
 
-    public void setTecnicos(List<Tecnico> tecnicos) {
+    public void setTecnicos(List<TecnicoResponseDTO> tecnicos) {
         this.tecnicos = tecnicos;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 }
