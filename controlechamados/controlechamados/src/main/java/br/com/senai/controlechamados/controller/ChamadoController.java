@@ -1,7 +1,9 @@
 package br.com.senai.controlechamados.controller;
 
+import br.com.senai.controlechamados.dto.AtualizarStatusDTO;
 import br.com.senai.controlechamados.dto.ChamadoRequestDTO;
 import br.com.senai.controlechamados.dto.ChamadoResponseDTO;
+import br.com.senai.controlechamados.dto.VincularTecnicosDTO;
 import br.com.senai.controlechamados.enums.StatusChamado;
 import br.com.senai.controlechamados.service.ChamadoService;
 import org.springframework.http.HttpStatus;
@@ -32,7 +34,7 @@ public class ChamadoController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ChamadoResponseDTO salvar(@RequestBody ChamadoRequestDTO dto) {
-        return service.salvar(dto);
+        return service.cadastrar(dto);
     }
 
     @PutMapping("/{id}")
@@ -43,13 +45,13 @@ public class ChamadoController {
 
     @PatchMapping("/{id}/status")
     public ChamadoResponseDTO alterarStatus(@PathVariable Long id,
-                                            @RequestParam StatusChamado status) {
-        return service.alterarStatus(id, status);
+                                            @RequestParam AtualizarStatusDTO status) {
+        return service.atualizarStatus(id, status);
     }
 
     @PatchMapping("/{id}/tecnico")
     public ChamadoResponseDTO vincularTecnico(@PathVariable Long id,
-                                              @RequestParam Long tecnicoId) {
+                                              @RequestParam VincularTecnicosDTO tecnicoId) {
         return service.vincularTecnico(id, tecnicoId);
     }
 
