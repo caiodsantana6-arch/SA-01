@@ -4,7 +4,8 @@ import br.com.senai.controlechamados.enums.Prioridade;
 import br.com.senai.controlechamados.enums.StatusChamado;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 import java.util.List;
 
 @Entity
@@ -24,8 +25,8 @@ public class Chamado {
     @Enumerated(EnumType.STRING)
     private StatusChamado status = StatusChamado.ABERTO;
 
-    private LocalDateTime dataAbertura = LocalDateTime.now();
-    private LocalDateTime dataFinalizacao;
+    private LocalDate dataAbertura = LocalDate.now();
+    private LocalDate dataFinalizacao;
 
     @ManyToOne
     private Categoria categoria;
@@ -41,7 +42,7 @@ public class Chamado {
     public Chamado() {
     }
 
-    public Chamado(Categoria categoria, LocalDateTime dataAbertura, LocalDateTime dataFinalizacao, String descricao, Long id, String local, Prioridade prioridade, String solicitante, StatusChamado status, List<Tecnico> tecnicos, String titulo) {
+    public Chamado(Categoria categoria, LocalDate dataAbertura, LocalDate dataFinalizacao, String descricao, Long id, String local, Prioridade prioridade, String solicitante, StatusChamado status, List<Tecnico> tecnicos, String titulo) {
         this.categoria = categoria;
         this.dataAbertura = dataAbertura;
         this.dataFinalizacao = dataFinalizacao;
@@ -63,19 +64,19 @@ public class Chamado {
         this.categoria = categoria;
     }
 
-    public LocalDateTime getDataAbertura() {
+    public LocalDate getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(LocalDateTime dataAbertura) {
+    public void setDataAbertura(LocalDate dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
-    public LocalDateTime getDataFinalizacao() {
+    public LocalDate getDataFinalizacao() {
         return dataFinalizacao;
     }
 
-    public void setDataFinalizacao(LocalDateTime dataFinalizacao) {
+    public void setDataFinalizacao(LocalDate dataFinalizacao) {
         this.dataFinalizacao = dataFinalizacao;
     }
 
