@@ -2,6 +2,8 @@ package br.com.senai.controlechamados.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Categoria {
     @Id
@@ -11,17 +13,17 @@ public class Categoria {
     private String nome;
     private String descricao;
 
-    @OneToMany
-    private Chamado chamado;
+    @OneToMany(mappedBy = "categoria")
+    private List<Chamado> chamados;
 
     public Categoria() {
     }
 
-    public Categoria(Long id, String nome, String descricao, Chamado chamado) {
+    public Categoria(Long id, String nome, String descricao, List<Chamado> chamados) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.chamado = chamado;
+        this.chamados = chamados;
     }
 
     public Long getId() {
@@ -48,11 +50,11 @@ public class Categoria {
         this.descricao = descricao;
     }
 
-    public Chamado getChamado() {
-        return chamado;
+    public List<Chamado> getChamado() {
+        return chamados;
     }
 
-    public void setChamado(Chamado chamado) {
-        this.chamado = chamado;
+    public void setChamado(List<Chamado> chamado) {
+        this.chamados = chamado;
     }
 }
