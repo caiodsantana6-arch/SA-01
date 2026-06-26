@@ -3,6 +3,8 @@ package br.com.senai.controlechamados.service;
 import br.com.senai.controlechamados.dto.CategoriaRequestDTO;
 import br.com.senai.controlechamados.dto.CategoriaResponseDTO;
 import br.com.senai.controlechamados.entity.Categoria;
+import br.com.senai.controlechamados.exception.RecursoNaoEncontradoException;
+import br.com.senai.controlechamados.exception.RegraNegocioException;
 import br.com.senai.controlechamados.repository.CategoriaRepository;
 import br.com.senai.controlechamados.repository.ChamadoRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,7 @@ public class CategoriaService {
                 .collect(Collectors.toList());
     }
 
-    public CategoriaResponseDTO busarPorId(Long id) {
+    public CategoriaResponseDTO buscarPorId(Long id) {
         Categoria categoria = buscarCategoriaPorId(id);
         return converterParaResponse(categoria);
     }
@@ -58,19 +60,19 @@ public class CategoriaService {
     public void excluir(Long id) {
         Categoria categoria = buscarCategoriaPorId(id);
         if (chamadoRepository.existsByCategoriaId(id)) {
-            System.out.println("Não é possível excluir uma categoria vinculada a chamados.");             //Todo: Mudar
+            throw new RegraNegocioException("Não é possível excluir uma categoria vinculada a chamados.");
         }
         categoriaRepository.delete(categoria);
     }
 
-    private Categoria buscarCategoriaPorId(Long id) {
+    public Categoria buscarCategoriaPorId(Long id) {
         return categoriaRepository.findById(id)
-                .orElse(null);                                                                      //Todo: Mudar
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Categoria não encontrada com o ID: " + id));                                                                      //Todo: Mudar
     }
 
     private void validarDadosCategoria(CategoriaRequestDTO dto) {
         if (dto.getNome() == null || dto.getNome().trim().isEmpty()) {
-            System.out.println("Não encontrada");                                                         //Todo: Mudar
+            throw new RegraNegocioException("O nome da categoria é obrigatório.");                                                      //Todo: Mudar
         }
     }
 
