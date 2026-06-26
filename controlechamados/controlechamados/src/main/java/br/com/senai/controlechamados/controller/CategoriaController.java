@@ -31,7 +31,7 @@ public class CategoriaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CategoriaResponseDTO salvar(@RequestBody CategoriaRequestDTO dto) {
-        return service.salvar(dto);
+        return service.cadastrar(dto);
     }
 
     @PutMapping("/{id}")
