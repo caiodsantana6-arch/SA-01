@@ -4,6 +4,8 @@ import br.com.senai.controlechamados.dto.TecnicoRequestDTO;
 import br.com.senai.controlechamados.dto.TecnicoResponseDTO;
 import br.com.senai.controlechamados.entity.Tecnico;
 import br.com.senai.controlechamados.enums.Ativo;
+import br.com.senai.controlechamados.exception.RecursoNaoEncontradoException;
+import br.com.senai.controlechamados.exception.RegraNegocioException;
 import br.com.senai.controlechamados.repository.CategoriaRepository;
 import br.com.senai.controlechamados.repository.ChamadoRepository;
 import br.com.senai.controlechamados.repository.TecnicoRepository;
@@ -34,7 +36,7 @@ public class TecnicoService {
         return converterParaResponse(tecnico);
     }
 
-    public TecnicoResponseDTO cadastrar(Long id, TecnicoRequestDTO dto) {
+    public TecnicoResponseDTO cadastrar( TecnicoRequestDTO dto) {
         validarDados(dto);
         Tecnico tecnico = new Tecnico();
         tecnico.setNome(dto.getNome());
@@ -60,10 +62,10 @@ public class TecnicoService {
         return converterParaResponse(tecAtt);
     }
 
-    public void deletar(Long id) {
+    public void excluir(Long id) {
         Tecnico tecnico = this.buscarTecnicoPorId(id);
         if (chamadoRepository.existsByTecnicosId(id)) {
-            System.out.println("Não é possível excluir um técnico vinculado a chamados."); //Todo: Mudar
+            throw new RegraNegocioException("Não é possível excluir um técnico vinculado a chamados.");
         }
 
         tecnicoRepository.delete(tecnico);
@@ -71,19 +73,19 @@ public class TecnicoService {
 
     private void validarDados(TecnicoRequestDTO dto) {
         if (dto.getNome() == null || dto.getNome().trim().isEmpty()) {
-            System.out.println("O nome do técnico é obrigatório.");
+            throw new RegraNegocioException("O nome do técnico é obrigatório.");
         }
         if (dto.getEmail() == null || dto.getEmail().trim().isEmpty()) {
-            System.out.println("O e-mail do técnico é obrigatório.");
+            throw new RegraNegocioException("O e-mail do técnico é obrigatório.");
         }
     }
 
-    private Tecnico buscarTecnicoPorId(Long id) {
+    public Tecnico buscarTecnicoPorId(Long id) {
         return tecnicoRepository.findById(id)
-                .orElse(null); //Todo: Mudar
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Técnico não encontrado com o ID: " + id));
     }
 
-    private TecnicoResponseDTO converterParaResponse(Tecnico tecnico) {
+    public TecnicoResponseDTO converterParaResponse(Tecnico tecnico) {
         return new TecnicoResponseDTO(
                 tecnico.getId(),
                 tecnico.getNome(),
