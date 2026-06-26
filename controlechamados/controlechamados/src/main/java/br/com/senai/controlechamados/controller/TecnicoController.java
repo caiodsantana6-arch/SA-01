@@ -31,7 +31,7 @@ public class TecnicoController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TecnicoResponseDTO salvar(@RequestBody TecnicoRequestDTO dto) {
-        return service.salvar(dto);
+        return service.cadastrar(dto);
     }
 
     @PutMapping("/{id}")
