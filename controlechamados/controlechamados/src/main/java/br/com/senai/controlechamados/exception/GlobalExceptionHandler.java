@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 
         ErrorResponse erro = new ErrorResponse(
                 HttpStatus.BAD_REQUEST.value(),
-                "Regra de negócio",
+                "Regra de negócio violada",
                 ex.getMessage());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
