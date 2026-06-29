@@ -50,7 +50,7 @@ public class Categoria {
         this.descricao = descricao;
     }
 
-    public List<Chamado> getChamado() {
+    public List<Chamado> getChamados() {
         return chamados;
     }
 
