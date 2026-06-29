@@ -1,8 +1,8 @@
 package br.com.senai.controlechamados.enums;
 
 public enum Prioridade {
-    BAIXO("Baixo"),
-    MEDIO("Medio"),
+    BAIXA("Baixa"),
+    MEDIA("Media"),
     ALTA("Alta");
 
     private String descricao;
