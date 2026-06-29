@@ -152,7 +152,7 @@ public class ChamadoService {
 
     private void validarTecnicosAtivos(List<Tecnico> tecnicos) {
         for (Tecnico t : tecnicos) {
-            if (t.getAtivo() == Ativo.ATIVO) {
+            if (t.getAtivo() == Ativo.INATIVO) {
                 throw new RegraNegocioException("O técnico " + t.getNome() + " está inativo e não pode ser vinculado.");
             }
         }
