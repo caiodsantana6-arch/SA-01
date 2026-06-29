@@ -1,9 +1,6 @@
 package br.com.senai.controlechamados.dto;
 
-import br.com.senai.controlechamados.entity.Categoria;
-import br.com.senai.controlechamados.entity.Tecnico;
 import br.com.senai.controlechamados.enums.Prioridade;
-import br.com.senai.controlechamados.enums.StatusChamado;
 
 import java.util.List;
 

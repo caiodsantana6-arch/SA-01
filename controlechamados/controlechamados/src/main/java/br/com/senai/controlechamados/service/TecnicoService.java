@@ -6,7 +6,6 @@ import br.com.senai.controlechamados.entity.Tecnico;
 import br.com.senai.controlechamados.enums.Ativo;
 import br.com.senai.controlechamados.exception.RecursoNaoEncontradoException;
 import br.com.senai.controlechamados.exception.RegraNegocioException;
-import br.com.senai.controlechamados.repository.CategoriaRepository;
 import br.com.senai.controlechamados.repository.ChamadoRepository;
 import br.com.senai.controlechamados.repository.TecnicoRepository;
 import org.springframework.stereotype.Service;

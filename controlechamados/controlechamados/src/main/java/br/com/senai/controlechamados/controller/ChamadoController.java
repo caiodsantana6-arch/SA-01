@@ -4,7 +4,6 @@ import br.com.senai.controlechamados.dto.AtualizarStatusDTO;
 import br.com.senai.controlechamados.dto.ChamadoRequestDTO;
 import br.com.senai.controlechamados.dto.ChamadoResponseDTO;
 import br.com.senai.controlechamados.dto.VincularTecnicosDTO;
-import br.com.senai.controlechamados.enums.StatusChamado;
 import br.com.senai.controlechamados.service.ChamadoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
