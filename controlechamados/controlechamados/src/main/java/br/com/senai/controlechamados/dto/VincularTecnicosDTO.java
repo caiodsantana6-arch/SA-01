@@ -7,11 +7,11 @@ public class VincularTecnicosDTO {
 
     public VincularTecnicosDTO(){}
 
-    public List<Long> getTenicosIds() {
+    public List<Long> getTecnicosIds() {
         return tecnicosIds;
     }
 
-    public void setTenicosIds(List<Long> tenicosIds) {
+    public void setTecnicosIds(List<Long> tenicosIds) {
         this.tecnicosIds = tenicosIds;
     }
 }

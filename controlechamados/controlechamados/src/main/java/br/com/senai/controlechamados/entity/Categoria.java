@@ -54,7 +54,7 @@ public class Categoria {
         return chamados;
     }
 
-    public void setChamado(List<Chamado> chamado) {
+    public void setChamados(List<Chamado> chamado) {
         this.chamados = chamado;
     }
 }
