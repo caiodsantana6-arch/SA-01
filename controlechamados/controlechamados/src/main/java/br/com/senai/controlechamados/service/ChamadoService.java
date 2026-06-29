@@ -92,8 +92,8 @@ public class ChamadoService {
         if (chamado.getStatus() == StatusChamado.FINALIZADO && dto.getStatus() == StatusChamado.ABERTO) {
             throw new RegraNegocioException("Um chamado finalizado não poderá voltar para aberto.");
         }
-        if (dto.getStatus() == StatusChamado.EM_ANDAMENTO && chamado.getTecnicos() == null ||
-        chamado.getTecnicos().isEmpty()) {
+        if (dto.getStatus() == StatusChamado.EM_ANDAMENTO && (chamado.getTecnicos() == null ||
+        chamado.getTecnicos().isEmpty())) {
             throw new RegraNegocioException("Um chamado só poderá ser alterado para EM_ANDAMENTO se possuir pelo menos um técnico vinculado.");
         }
 
@@ -113,7 +113,7 @@ public class ChamadoService {
         if (chamado.getStatus() == StatusChamado.FINALIZADO) {
             throw new RegraNegocioException("Um chamado FINALIZADO não poderá receber novos técnicos.");
         }
-        List<Tecnico> tecnicos = buscarTecnicos(dto.getTenicosIds());
+        List<Tecnico> tecnicos = buscarTecnicos(dto.getTecnicosIds());
         validarTecnicosAtivos(tecnicos);
 
         chamado.setTecnicos(tecnicos);
