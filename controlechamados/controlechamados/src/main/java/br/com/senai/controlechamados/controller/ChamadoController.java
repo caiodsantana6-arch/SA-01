@@ -45,13 +45,13 @@ public class ChamadoController {
 
     @PatchMapping("/{id}/status")
     public ChamadoResponseDTO alterarStatus(@PathVariable Long id,
-                                            @RequestParam AtualizarStatusDTO status) {
+                                            @RequestBody AtualizarStatusDTO status) {
         return service.atualizarStatus(id, status);
     }
 
     @PatchMapping("/{id}/tecnico")
     public ChamadoResponseDTO vincularTecnico(@PathVariable Long id,
-                                              @RequestParam VincularTecnicosDTO tecnicoId) {
+                                              @RequestBody VincularTecnicosDTO tecnicoId) {
         return service.vincularTecnico(id, tecnicoId);
     }
 
