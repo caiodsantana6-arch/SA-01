@@ -35,7 +35,7 @@ public class TecnicoService {
         return converterParaResponse(tecnico);
     }
 
-    public TecnicoResponseDTO cadastrar( TecnicoRequestDTO dto) {
+    public TecnicoResponseDTO cadastrar(TecnicoRequestDTO dto) {
         validarDados(dto);
         Tecnico tecnico = new Tecnico();
         tecnico.setNome(dto.getNome());
