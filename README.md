@@ -105,15 +105,16 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 
 ### Chamados (`/chamados`)
 
-| Método | Rota                    | Descrição                                                              |
-|--------|-------------------------|--------------------------------------------------------------------------|
-| GET    | `/chamados`             | Lista todos os chamados cadastrados                                     |
-| GET    | `/chamados/{id}`        | Busca um chamado específico pelo ID                                     |
-| POST   | `/chamados`              | Cadastra um novo chamado                                                 |
-| PUT    | `/chamados/{id}`        | Atualiza todos os dados de um chamado existente                         |
-| PATCH  | `/chamados/{id}/status`  | Atualiza apenas o status do chamado (ação específica)                   |
-| PATCH  | `/chamados/{id}/tecnico` | Vincula (substitui) a lista de técnicos responsáveis pelo chamado       |
-| DELETE | `/chamados/{id}`        | Exclui um chamado (não permitido se estiver `FINALIZADO`)               |
+| Método | Rota                      | Descrição                                                         |
+|--------|---------------------------|-------------------------------------------------------------------|
+| GET    | `/chamados`               | Lista todos os chamados cadastrados                               |
+| GET    | `/chamados/{id}`          | Busca um chamado específico pelo ID                               |
+| POST   | `/chamados`               | Cadastra um novo chamado                                          |
+| PUT    | `/chamados/{id}`          | Atualiza todos os dados de um chamado existente                   |
+| PATCH  | `/chamados/{id}/status`   | Atualiza apenas o status do chamado (ação específica)             |
+| PATCH  | `/chamados/{id}/tecnico`  | Vincula (substitui) a lista de técnicos responsáveis pelo chamado |
+| DELETE | `/chamados/{id}`          | Exclui um chamado (não permitido se estiver `FINALIZADO`)         |
+| DELETE | `/chamados/{id}/tecnicos` | Desvincular tecnico do chamado                                    |
 
 ### Categorias (`/categorias`)
 
