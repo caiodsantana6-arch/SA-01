@@ -31,7 +31,7 @@ As principais regras de negócio implementadas garantem a integridade do fluxo d
 - **Maven** (com Maven Wrapper — `mvnw` / `mvnw.cmd`)
 - **JUnit / Spring Boot Test** (dependências de teste: `data-jpa-test`, `validation-test`, `webmvc-test`)
 
-> A dependência `spring-boot-starter-security` está declarada no `pom.xml`, mas nenhuma classe de configuração de segurança foi encontrada no código-fonte atual do projeto.
+
 
 ## Como Executar o Projeto
 
