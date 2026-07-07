@@ -115,8 +115,9 @@ public class ChamadoService {
         }
         List<Tecnico> tecnicos = buscarTecnicos(dto.getTecnicosIds());
         validarTecnicosAtivos(tecnicos);
+        validarTecnicosJaVinculados(chamado, tecnicos);
 
-        chamado.setTecnicos(tecnicos);
+        chamado.getTecnicos().addAll(tecnicos);
         return converterParaResponse(chamadoRepository.save(chamado));
     }
 
@@ -128,6 +129,22 @@ public class ChamadoService {
 
         chamadoRepository.delete(chamado);
     }
+
+    public ChamadoResponseDTO desvincularTecnico(Long chamadoId, Long tecnicoId) {
+        Chamado chamado = buscarChamadoPorId(chamadoId);
+
+        if (chamado.getStatus() == StatusChamado.FINALIZADO) {
+            throw new RegraNegocioException("Não é possível desvincular técnicos de um chamado FINALIZADO.");
+        }
+        boolean removido = chamado.getTecnicos().removeIf(t -> t.getId().equals(tecnicoId));
+
+        if (!removido) {
+            throw new RegraNegocioException("O técnico informado não está vinculado a este chamado.");
+        }
+
+        return converterParaResponse(chamadoRepository.save(chamado));
+    }
+
 
     private void validarDadosChamado(ChamadoRequestDTO dto) {
         if (dto.getTitulo() == null || dto.getTitulo().trim().isEmpty()) {
@@ -161,6 +178,17 @@ public class ChamadoService {
     private Chamado buscarChamadoPorId(Long id) {
         return chamadoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Chamado não encontrado com o ID: " + id));
+    }
+    private void validarTecnicosJaVinculados(Chamado chamado, List<Tecnico> novosTecnicos) {
+        List<Tecnico> tecnicosAtuais = chamado.getTecnicos();
+        if (tecnicosAtuais == null || tecnicosAtuais.isEmpty()) return;
+        for (Tecnico t : novosTecnicos) {
+            boolean jaVinculado = tecnicosAtuais.stream()
+                    .anyMatch(existente -> existente.getId().equals(t.getId()));
+            if (jaVinculado) {
+                throw new RegraNegocioException("O técnico " + t.getNome() + " já está vinculado a este chamado.");
+            }
+        }
     }
 
     public ChamadoResponseDTO converterParaResponse(Chamado chamado) {

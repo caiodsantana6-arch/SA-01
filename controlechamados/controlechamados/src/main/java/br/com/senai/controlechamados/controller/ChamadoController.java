@@ -59,4 +59,10 @@ public class ChamadoController {
     public void excluir(@PathVariable Long id) {
         service.excluir(id);
     }
+
+    @DeleteMapping("/{id}/tecnico/{tecnicoId}")
+    public ChamadoResponseDTO desvincularTecnico(@PathVariable Long id, @PathVariable Long tecnicoId) {
+        return service.desvincularTecnico(id, tecnicoId);
+    }
+
 }
